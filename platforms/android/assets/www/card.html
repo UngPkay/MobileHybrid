@@ -1,0 +1,30 @@
+ 
+<div id="map{{id}}">
+  
+<ons-card class="post">
+        <ons-list-item class="post_title">
+          <div class="left">
+            <img class="list-item__thumbnail" src="https://maxcdn.icons8.com/Share/icon/color/Cinema//sherlock_holmes1600.png" >
+          </div>
+          <div class="right">
+              <ons-button class="corner-button" modifier="quiet" onclick='deletepost({{id}})'><ons-icon icon="ion-trash-a"></ons-icon></ons-button>
+</div>
+<div class="center">
+              <ons-button class="corner-button" modifier="quiet" onclick='Updatepost({{id}})'><i class="fa fa-long-arrow-up" aria-hidden="true"></i></ons-button>
+          </div>
+        </ons-list-item>
+    
+        <div style="text-align: center; position: relative;" ondblclick="like(1)">
+          <ons-icon size="150px" id="post-like-1" class="post-like" icon="ion-ios-heart"></ons-icon>
+          <img class="post-image" src="{{photo}}">
+        </div>
+    
+        <ons-list-item class="post-button-bar" modifier="nodivider">
+          <div class="right">
+        </div>
+        </ons-list-item>
+        
+        <div class="post-caption"><b>{{title}}</b> <br>{{comment}} </div>
+      </ons-card>
+
+    </div>

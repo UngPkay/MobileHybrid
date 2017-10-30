@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
+  <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
+  <link rel="stylesheet" href="index.css">
+  <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
+  <script src="https://unpkg.com/jquery/dist/jquery.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.js"></script>
+  
+  <script src="index.js"></script>
+  <style>
+    #map {
+      height: 300px;
+      width: 100%;
+    }
+  </style>
+</head>
+<script id="template" type="x-tmpl-musctache">
+
+</script>
+
+<body>
+  <ons-page>
+    <ons-toolbar>
+      <div class="center">PSU Pin</div>
+      <a href="index.html"><ons-button class="corner-button" modifier="quiet"><ons-icon icon="ion-android-arrow-back"></ons-icon></ons-button></a>
+      <div class="right">
+        <ons-toolbar-button>
+          <ons-icon icon="ion-navicon, material:md-menu"></ons-icon>
+        </ons-toolbar-button>
+      </div>
+    </ons-toolbar>
+
+    <ons-tabbar swipeable position="auto">
+      <ons-tab page="time.html" id="timetab" label="Time Line" icon="fa-clock-o" badge="" active>
+      </ons-tab>
+      <ons-tab page="new.html" label="New Pin" icon="fa-thumb-tack" active-icon="fa-thumb-tack">
+      </ons-tab>
+      <ons-tab page="map.html" label="Pin Map" icon="fa-globe" active-icon="fa-globe">
+      </ons-tab>
+    </ons-tabbar>
+  </ons-page>
+
+  <template id="time.html">
+    <ons-page id="time">
+        
+       <div id="pins">
+
+      </div>
+      
+      <center> <form name="registerForm" method="post">
+      <span>
+        <H1><center>Update</center></H1>
+        <br />
+        <input class="text-input text-input--material" id="idu" placeholder="id" type="text" required> 
+        <br>
+        <br>
+        <textarea class="textarea textarea--transparent" id="textarea" rows="3" placeholder="Any recommendation" style="width: 50%; margin: 0 auto;"></textarea>
+        <br>
+        <br>
+        <input class="text-input text-input--material" id="title" placeholder="title" type="text" required> 
+      
+        <br> 
+        <br>
+        
+       
+       
+       <input class="login-button button--large button" id="submit1" type="button" name="submit" value="Submit" style="width: 95%; margin: 0 auto;">
+      </span>
+     </form></center>
+        
+     <center>
+     
+          
+   
+     <br>
+    </ons-page>
+  </template>
+
+  <template id="new.html">
+    <ons-page id="new">  
+<br>
+<div id="map">         
+</div>
+<script >
+  function initMap() {
+    // Map options
+    var options = {
+      zoom: 16,
+      center: { lat: 7.8947616999, lng: 98.3520781 }
+
+    }
+
+    // New map
+    var map = new google.maps.Map(document.getElementById('map'), options);
+
+    // Listen for click on map
+    google.maps.event.addListener(map, 'click', function (event) {
+      // Add marker
+      addMarker({ coords: event.latLng });
+  
+      
+     
+     var x = event.latLng.lat();
+     var y = event.latLng.lng();
+  
+           document.getElementById("lat1").value = x;
+           document.getElementById("lng1").value = y;
+          
+    });
+
+    var markers = [
+      {
+        coords: { lat: 7.8947616999, lng: 98.3520781 },
+        content: '<h1>PSU PHUKET campus</h1>'
+      }
+
+
+
+    ];
+    addMarker(markers[0]);
+
+
+    // Add Marker Function
+    function addMarker(props) {
+      var marker = new google.maps.Marker({
+        position: props.coords,
+        map: map,
+        //icon:props.iconImage
+      });
+
+      // Check for customicon
+      if (props.iconImage) {
+        // Set icon image
+        marker.setIcon(props.iconImage);
+      }
+
+      // Check content
+      if (props.content) {
+        var infoWindow = new google.maps.InfoWindow({
+          content: props.content
+        });
+
+        marker.addListener('click', function () {
+          infoWindow.open(map, marker);
+        });
+      }
+    }
+  }
+</script>
+
+ <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0bHbQDm11D6EQ_xX8NNdwkMQXRjSdjb4&callback=initMap">
+ </script>
+<div class="center">Please Give Advice Here!</div>
+ <center><form name="indexform" method="post">
+   <br>
+
+ <textarea class="textarea textarea--transparent" id="textarea" rows="3" placeholder="Any recommendation" style="width: 50%; margin: 0 auto;"></textarea>
+ <br>
+ <br>
+ <input class="text-input text-input--material" id="title" placeholder="title" type="text" required> 
+ <br>
+ <br>
+ <input class="text-input text-input--material" id="photo" placeholder="Photo (url)" type="text" required><input id="convert" type="button" name="convert" value="convert"><ons-button id="hello">Take a photo</ons-button> 
+ <br>
+ <input class="text-input text-input--material" id="photo1" placeholder="Photo (Base 64)" type="text" required> 
+ <br> 
+ <input class="text-input text-input--material" id="lat1" placeholder="Latitude" type="text" required>
+<br>
+<br>
+ <input class="text-input text-input--material" id="lng1" placeholder="lnngtitude" type="text" required>
+ <br> 
+ <br>
+ 
+
+
+<input class="login-button button--large button" id="submit" type="button" name="submit" value="Submit" style="width: 95%; margin: 0 auto;">
+  
+ </form> </center> 
+ 
+ <img src="" style="width:100%" id="preview">
+
+ <br>
+ <br>
+ 
+ 
+ 
+</ons-page>
+  </template>
+
+
+
+
+  <template id="map.html">
+    <ons-page id="map">
+      
+     <center><button><a href="ImportingData.html">Data Analysis</a></button></center>
+    
+
+      
+       
+
+
+     
+            
+    </ons-page>
+   
+    
+  </template>
+
+<script src="cordova.js"></script>
+
+</body>
+
+</html>
